@@ -1,0 +1,20 @@
+.card{
+    margin-top: 10px;
+}
+.bill{
+    justify-content: center;
+    align-items: center;
+}
+.btn-custom{
+    background-color: #20948B;
+    width: 100%;
+}
+h4{
+    color: #20948B;
+}
+.details{
+    color: #20948B;
+}
+td{
+    color: #20948B;
+}
