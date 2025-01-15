@@ -1,10 +1,3 @@
-.btn-custom{
-    background-color: #20948B;
-    width: 100%;
-}
-#fname, #sname{
-    width: 100%;
-}
 .container{
     display: flex;
     justify-content: center;
@@ -12,7 +5,6 @@
     height: 100vh;
 }
 .inner-container{
-    margin-top: 20px;
     width: 500px;
     border: 2px solid #20948B;
     padding: 10px;
@@ -24,4 +16,8 @@ label{
 h1{
     text-align: center;
     color: #20948B;
+}
+.btn-custom{
+    background-color: #20948B;
+    width: 100%;
 }

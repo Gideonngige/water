@@ -15,4 +15,13 @@ class WaterController extends Controller
     public function register(){
         return view('water.register');
     }
+    public function login(){
+        return view('water.login');
+    }
+    public function messages(){
+        return view('water.messages');
+    }
+    public function admin(){
+        return view('water.admin');
+    }
 }
