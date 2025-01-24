@@ -17,7 +17,7 @@
             </div>
             <div class="card-body">
                 <h4>{{$subject}}</h4>
-                <img src="{{ $message->embed(public_path('/images/tech.png')) }}" alt="bird" class="card-image" width="100%">
+                <img src="{{ $message->embed(public_path('/images/kickoff.png')) }}" alt="kickoff" class="card-image" width="100%">
                 <p>{{$msg}}</p>
             </div>
             <div class="card-footer">

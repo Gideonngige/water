@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ asset('styles/register.css') }}">
 <div class="inner-container">
     <h1>Register</h1>
-    <form>
+    <form method="post" action="{{ route('register') }}">
         @csrf
         <table width="100%">
             <tr>
@@ -18,7 +18,7 @@
             </tr>
         </table>
         <label for="area">Area of resident</label><br>
-        <select class="form-control" id="area" name="area" required>
+        <select class="form-control" id="area_resident" name="area_resident" required>
             <option value="Hindi Town">Hindi Town</option>
             <option value="Hindi Mashambani">Hindi Mashambani</option>
             <option value="Jua kali">Jua kali</option>
@@ -37,6 +37,13 @@
         <button type="submit" class="btn btn-custom">Register</button>
         <p>Already have an account? <a href="">Login here</a></p>
     </form>
+    @if(isset($message))
+    <div class="alert alert-danger">
+        <p>
+            {{ $message }}
+        </p>
+    </div>
+    @endif
 
 </div>
 @stop

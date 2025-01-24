@@ -8,10 +8,14 @@
         <div class="card-body">
             <table width="100%">
                 <tr>
-                    <td>Name: John Doe</td>
-                    <td>Email: johndoe@example.com</td>
-                    <td>Phone: 123-456-7890</td>
-                    <td>Previledges: All</td>
+                    @if(isset($name) && isset($email) && isset($phonenumber) && isset($previledges))
+                    <td>Name: {{ $name }}</td>
+                    <td>Email: {{ $email }}</td>
+                    <td>Phone: {{ $phonenumber }}</td>
+                    <td>Previledges: {{ $previledges }}</td>
+                    @else
+                    <p>No details found.</p>
+                    @endif
                 </tr>
             </table>
         </div>
@@ -22,83 +26,68 @@
             <div class="card">
                 <div class="card-header">Customers</div>
                 <div class="card-body">
-                    <p class="customers">Total customers: 1,234</p>
-                    <p class="customers">Hindi Town: 56</p>
-                    <p class="customers">Hindi Mashambani: 90</p>
-                    <p class="customers">Ndeu: 34</p>
-                    <p class="customers">Sabasaba: 90</p>
+                    @if(isset( $total_customers ) && isset($hindi_town ) && isset($hindi_mashambani) && isset($ndeu) && isset($sabasaba))
+                    <p class="customers">Total customers: {{ $total_customers }}</p>
+                    <p class="customers">Hindi Town: {{ $hindi_town }}</p>
+                    <p class="customers">Hindi Mashambani: {{ $hindi_mashambani }}</p>
+                    <p class="customers">Ndeu: {{ $ndeu }}</p>
+                    <p class="customers">Sabasaba: {{ $sabasaba }}</p>
+                    @else
+                    <p>No data found.</p>
+                    @endif
                 </div>
                 <div class="card-footer"></div>
             </div>
+
+            {{-- <div class="col-md-6"> --}}
+                <div class="card">
+                    <div class="card-header">Area Water Usage</div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Area</th>
+                                <th>Water(m3)</th>
+                                <th>Amount billed</th>
+                                <th>Amount Paid</th>
+                                <th>Balance</th>
+                            </tr>
+                           @if(isset($data))
+                           @foreach($data as $area => $stats)
+                           <tr>
+                                <td>{{ $area }}</td>
+                                <td>{{ $stats['meter_reading'] }}</td>
+                                <td>{{ $stats['billed'] }}</td>
+                                <td>{{ $stats['paid'] }}</td>
+                                <td>{{ $stats['balance'] }}</td>
+                           </tr>
+                            @endforeach
+                            @else
+                            <p>No data found.</p>
+                            @endif
+                        </table>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            {{-- </div> --}}
         </div>
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Payments</div>
                 <div class="card-body">
-                    <p class="customers">John Doe <br> Amount Ksh. 300<br>12/01/2025 09:00 am</p>
-                    <p class="customers">John Doe <br> Amount Ksh. 300<br>12/01/2025 09:00 am</p>
-                    <p class="customers">John Doe <br> Amount Ksh. 300<br>12/01/2025 09:00 am</p>
-                    <p class="customers">John Doe <br> Amount Ksh. 300<br>12/01/2025 09:00 am</p>
-                    <p class="customers">John Doe <br> Amount Ksh. 300<br>12/01/2025 09:00 am</p><hr>
-                    <p class="customers">Total Debt: Ksh. 90000 <br> Total Paid: 60000  <br>Balance 30000</p>
+                    {{-- @if(isset($transaction)) --}}
+                    @foreach ($transactions as $transaction)
+                    <p class="customers">Transaction ID: {{ $transaction->transaction_id }} <br> Amount Ksh. {{ $transaction->amount }}<br>Date: {{ $transaction->transaction_date }}</p>
+                    @endforeach
+                    {{-- @else --}}
+                    {{-- <p>No transactions found.</p> --}}
+                    {{-- @endif --}}
+
                 </div>
                 <div class="card-footer"></div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">Area Water Usage</div>
-                <div class="card-body">
-                    <table class="table table-striped">
-                        <tr>
-                            <th>Area</th>
-                            <th>Water(m3)</th>
-                            <th>Amount billed</th>
-                            <th>Amount Paid</th>
-                            <th>Balance</th>
-                        </tr>
-                        <tr>
-                            <td>Hindi Town</td>
-                            <td>30</td>
-                            <td>3000</td>
-                            <td>2000</td>
-                            <td>1000</td>
-                        </tr>
-                        <tr>
-                            <td>Hindi Mashambani</td>
-                            <td>30</td>
-                            <td>3000</td>
-                            <td>2000</td>
-                            <td>1000</td>
-                        </tr>
-                        <tr>
-                            <td>Ndeu</td>
-                            <td>30</td>
-                            <td>3000</td>
-                            <td>2000</td>
-                            <td>1000</td>
-                        </tr>
-                        <tr>
-                            <td>Sabasaba</td>
-                            <td>30</td>
-                            <td>3000</td>
-                            <td>2000</td>
-                            <td>1000</td>
-                        </tr>
-                        <tr>
-                            <td>Total</td>
-                            <td>120</td>
-                            <td>9000</td>
-                            <td>6000</td>
-                            <td>3000</td>
-                        </tr>
-
-
-                    </table>
-                </div>
-                <div class="card-footer"></div>
-            </div>
-        </div>
+        
     </div>
 </div>
 @stop
+

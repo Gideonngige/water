@@ -19,21 +19,22 @@
           <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <a class="nav-link" href="">Home</a>
+                <a class="nav-link" href="{{ route('home')}}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Bills</a>
+                <a class="nav-link" href="{{ route('bill')}}">Bills</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="">Water usage</a>
               </li>
               <li class="nav-item" >
-                <a class="nav-link" href="">Messages</a>
+                <a class="nav-link" href="{{ route('messages')}}">Messages</a>
               </li>
               <li class="nav-item" >
-                <a class="nav-link" href="">Admin</a>
+                <a class="nav-link" href="{{ route('admin')}}"  data-bs-toggle="modal" data-bs-target="#myModal">Admin</a>
               </li>
             </ul>
+            <a class="nav-link" href="#">@if(isset($name)){{ $name }} @endif</a>
           </div>
         </div>
       </nav>
@@ -41,6 +42,38 @@
         @yield('content')
     </div>
     @yield('footer')
-    
+  
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Admin Login</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form method="post" action="{{ route('adminpost') }}">
+          @csrf
+          <label>Email</label><br>
+          <input type="email" id="email" class="form-control" name="email" required><br>
+          <label>Password</label><br>
+          <input type="password" id="password" class="form-control" name="password" required><br>
+          <input type="submit" class="btn btn-custom" value="Login">
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 </body>
 </html>

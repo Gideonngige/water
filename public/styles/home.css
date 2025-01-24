@@ -1,0 +1,17 @@
+.home{
+    background-image: url('/images/water.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 500px;
+    margin-top: 10px;
+}
+.home-content{
+    color: white;
+    padding: 30px;
+}
+.btn-custom{
+    background-color: #20948B;
+    width: 200px;
+    margin: 10px;
+}
