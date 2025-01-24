@@ -206,8 +206,8 @@ class WaterController extends Controller
 
         }
 
-
-        return view('water.admin', ['hindi_town' => $hindi_town, 'hindi_mashambani' => $hindi_mashambani,'ndeu' => $ndeu, 'sabasaba'=>$sabasaba, 'total_customers'=>$total_customers], compact('data'));
+        $select_payments = DB::select('select transaction_id, amount, transaction_date from transactions');
+        return view('water.admin', ['hindi_town' => $hindi_town, 'hindi_mashambani' => $hindi_mashambani,'ndeu' => $ndeu, 'sabasaba'=>$sabasaba, 'total_customers'=>$total_customers, 'transactions'=>$select_payments], compact('data'));
     }
 
     public function adminpost(Request $request){
@@ -265,11 +265,47 @@ class WaterController extends Controller
                      'balance' => 0,
                  ];
             }
+            
         }
 
         $select_payments = DB::select('select transaction_id, amount, transaction_date from transactions');
 
         return view('water.admin', ['hindi_town' => $hindi_town, 'hindi_mashambani' => $hindi_mashambani,'ndeu' => $ndeu, 'sabasaba'=>$sabasaba, 'total_customers'=>$total_customers, 'name'=>$name, 'email'=>$email, 'phonenumber'=>$phonenumber, 'previledges'=>$previledges, 'transactions'=>$select_payments], compact('data'));
+        }
+
+    }
+
+    public function adminbillget(){
+        return view('water.admin');
+    }
+
+    public function adminbill(Request $request){
+        $customer_id = $request->input('customer_id');
+        $units = $request->input('units');
+        $due_date = $request->input('due_date');
+
+        $select_customer = DB::select('select customer_id from customers where customer_id = ?', [$customer_id]);
+        if($select_customer){
+            $insert_meter_reading = DB::insert('insert into waterusage(customer_id, meter_reading) values (?, ?)', [$customer_id, $units]);
+
+            $amount = ($units * 5) / 0.02;
+            $due_date = '2025-09-25';
+
+            $insert_bill = DB::insert('insert into bills(customer_id, amount, due_date, status) values(?, ?, ?, ?)',[$customer_id, $amount, $due_date, "unpaid"]);
+
+            if($insert_meter_reading && $insert_bill){
+                $message = "Bill submitted successfully";
+                return redirect('/admin')->with('message', $message);
+
+            }
+            else{
+                $message = "Error in submitting bill";
+                return redirect('/admin')->with('message', $message);
+            }   
+        }
+        else{
+            $message = "Customer not found";
+            return redirect('/admin')->with('message', $message);
         }
 
     }

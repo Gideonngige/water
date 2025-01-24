@@ -16,8 +16,10 @@ Route::get('register', [WaterController::class,'registerget'])->name('register')
 Route::post('login', [WaterController::class,'login'])->name('login');
 Route::get('login', [WaterController::class,'loginget'])->name('login');
 Route::get('messages', [WaterController::class,'messages'])->name('messages');
-Route::get('admin', [WaterController::class,'admin'])->name('admin');
-Route::post('admin', [WaterController::class,'adminpost'])->name('adminpost');
+Route::get('admin/', [WaterController::class,'admin'])->name('admin');
+Route::post('admin/', [WaterController::class,'adminpost'])->name('adminpost');
+Route::post('adminbill/', [WaterController::class,'adminbill'])->name('adminbill');
+Route::get('adminbill/', [WaterController::class,'adminbillget'])->name('adminbillget');
 
 
 

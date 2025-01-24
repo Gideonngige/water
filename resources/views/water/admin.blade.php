@@ -69,18 +69,37 @@
                     <div class="card-footer"></div>
                 </div>
             {{-- </div> --}}
+            <div class="card">
+                <div class="card-header">Submit Bill</div>
+                <div class="card-body">
+                    <form method="post" action="{{ route('adminbill')}}">
+                        @csrf
+                        <label>Customer ID</label><br>
+                        <input type="number" min="1" class="form-control" name="customer_id" id="customer_id" required /><br>
+                        <label>Water Units(m3)</label><br>
+                        <input type="number" min="0" class="form-control" name="units" id="units" required /><br>
+                        <label>Due date</label>
+                        <input type="text" class="form-control" name="due_date" id="due_date" required placeholder="2024-12-23" /><br>
+                        <input type="submit" class="btn btn-custom" value="Submit Bill" />
+                    </form>
+                    {{-- @if(isset($message))
+                    <p>{{ $message }}</p>
+                    @endif --}}
+                </div>
+                <div class="card-footer"></div>
+            </div>
         </div>
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Payments</div>
                 <div class="card-body">
-                    {{-- @if(isset($transaction)) --}}
+                    {{-- @if(isset($transactions->transaction_id) && $transactions->amount) --}}
                     @foreach ($transactions as $transaction)
                     <p class="customers">Transaction ID: {{ $transaction->transaction_id }} <br> Amount Ksh. {{ $transaction->amount }}<br>Date: {{ $transaction->transaction_date }}</p>
                     @endforeach
-                    {{-- @else --}}
-                    {{-- <p>No transactions found.</p> --}}
-                    {{-- @endif --}}
+                    {{-- @else
+                    <p>No transactions found.</p>
+                    @endif --}}
 
                 </div>
                 <div class="card-footer"></div>

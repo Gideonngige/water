@@ -7,3 +7,10 @@
     padding: 10px;
     border-radius: 5px;
 }
+.btn-custom{
+    background-color: #20948B;
+    width: 100%;
+}
+label{
+    color: #20948B;
+}
